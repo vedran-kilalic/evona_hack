@@ -33,9 +33,9 @@ public class PlayerDataController {
     }
 
     @RequestMapping(value = "/deposit", method = RequestMethod.POST)
-    public PlayerData deposit(@RequestBody Transactions transactions){
-        PlayerData playerData = transactions.getPlayerData();
-        return playerDataService.updateCashDeposit(transactions,playerData);
+    public void deposit(@RequestBody Transactions transactions){
+        PlayerData playerData = playerDataService.getById(transactions.getPlayerData());
+        playerDataService.updateCashDeposit(transactions,playerData);
     }
 
 }

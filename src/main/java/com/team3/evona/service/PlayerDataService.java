@@ -39,11 +39,10 @@ public class PlayerDataService {
 
     }
 
-    public PlayerData updateCashDeposit(Transactions transactions, PlayerData playerData){
+    public void updateCashDeposit(Transactions transactions, PlayerData playerData){
         Optional playerId = playerDataRepo.findById(transactions.getPlayerData().getId());
         double amountToTransfer = transactions.getAmount();
         playerData.setCash(playerData.getCash() + amountToTransfer);
         playerDataRepo.save(playerData);
-        return playerData;
     }
 }
