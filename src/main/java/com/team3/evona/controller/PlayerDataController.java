@@ -4,17 +4,24 @@ import com.team3.evona.models.PlayerData;
 import com.team3.evona.models.Transactions;
 import com.team3.evona.service.PlayerDataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/")
+
 public class PlayerDataController {
 
     @Autowired
     PlayerDataService playerDataService;
+
+    @GetMapping("/")
+    public ModelAndView homePage(){
+        return new ModelAndView("evona.html");
+    }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Optional<PlayerData> login(@RequestBody PlayerData playerData){
