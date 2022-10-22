@@ -19,11 +19,16 @@ public class PlayerData {
     @Column(name = "levelId")
     int levelId;
 
-    public PlayerData(String id, String username, int points, int levelId) {
+    @Column(name = "cash")
+    double cash;
+
+    public PlayerData(String id, String username, int points, int levelId, double cash) {
         this.id = id;
         this.username = username;
         this.points = points;
         this.levelId = levelId;
+        this.cash = cash;
+
     }
 
     public PlayerData() {
@@ -59,5 +64,13 @@ public class PlayerData {
 
     public void setLevelId(int levelId) {
         this.levelId = levelId;
+    }
+
+    public double getCash() {
+        return cash;
+    }
+
+    public void setCash(double cash) {
+        this.cash = cash;
     }
 }

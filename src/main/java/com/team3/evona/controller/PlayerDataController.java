@@ -1,6 +1,7 @@
 package com.team3.evona.controller;
 
 import com.team3.evona.models.PlayerData;
+import com.team3.evona.models.Transactions;
 import com.team3.evona.service.PlayerDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,12 @@ public class PlayerDataController {
         else {
             return playerDataService.loginPlayer(playerData);
         }
+    }
+
+    @RequestMapping(value = "/withdraw", method = RequestMethod.POST)
+    public PlayerData withdraw(@RequestBody Transactions transactions){
+        PlayerData playerData = transactions.getPlayerData();
+        return playerDataService.updateCash(transactions,playerData);
     }
 
 }
