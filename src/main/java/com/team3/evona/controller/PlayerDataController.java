@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/")
@@ -15,8 +16,13 @@ public class PlayerDataController {
     PlayerDataService playerDataService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public PlayerData login(@RequestBody PlayerData playerData){
-        return playerDataService.loginPlayer(playerData);
+    public Optional<PlayerData> login(@RequestBody PlayerData playerData){
+        if (playerDataService.loginPlayer(playerData).isEmpty()){
+            return Optional.ofNullable(playerDataService.savePlayer(playerData));
+        }
+        else {
+            return playerDataService.loginPlayer(playerData);
+        }
     }
 
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PlayerDataService {
@@ -17,13 +18,11 @@ public class PlayerDataService {
         return playerDataRepo.findAll();
     }
 
-    public PlayerData loginPlayer(PlayerData playerData){
-        List<PlayerData> players = playerDataRepo.findAll();
-        for(int i = 0; i < players.size(); i++) {
-            if (playerData.getId().equals(players.get(i).getId())) {
-                return players.get(i);
-            }
-        }
-       return null;
+    public Optional<PlayerData> loginPlayer(PlayerData playerData){
+       return playerDataRepo.findById(playerData.getId());
+    }
+
+    public PlayerData savePlayer(PlayerData playerData){
+        return playerDataRepo.save(playerData) ;
     }
 }
