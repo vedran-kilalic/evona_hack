@@ -23,11 +23,23 @@ public class PlayerDataService {
        return playerDataRepo.findById(playerData.getId());
     }
 
+    public PlayerData getById(PlayerData playerData){
+        return playerDataRepo.getById(playerData.getId());
+    }
+
     public PlayerData savePlayer(PlayerData playerData){
         return playerDataRepo.save(playerData) ;
     }
 
-    public PlayerData updateCash(Transactions transactions, PlayerData playerData){
+    public void updateCashWithdraw(Transactions transactions, PlayerData playerData){
+        Optional playerId = playerDataRepo.findById(transactions.getPlayerData().getId());
+        double amountToTransfer = transactions.getAmount();
+        playerData.setCash(playerData.getCash() - amountToTransfer);
+        playerDataRepo.save(playerData);
+
+    }
+
+    public PlayerData updateCashDeposit(Transactions transactions, PlayerData playerData){
         Optional playerId = playerDataRepo.findById(transactions.getPlayerData().getId());
         double amountToTransfer = transactions.getAmount();
         playerData.setCash(playerData.getCash() + amountToTransfer);

@@ -27,9 +27,15 @@ public class PlayerDataController {
     }
 
     @RequestMapping(value = "/withdraw", method = RequestMethod.POST)
-    public PlayerData withdraw(@RequestBody Transactions transactions){
+    public void withdraw(@RequestBody Transactions transactions){
+        PlayerData playerData = playerDataService.getById(transactions.getPlayerData());
+        playerDataService.updateCashWithdraw(transactions,playerData);
+    }
+
+    @RequestMapping(value = "/deposit", method = RequestMethod.POST)
+    public PlayerData deposit(@RequestBody Transactions transactions){
         PlayerData playerData = transactions.getPlayerData();
-        return playerDataService.updateCash(transactions,playerData);
+        return playerDataService.updateCashDeposit(transactions,playerData);
     }
 
 }
