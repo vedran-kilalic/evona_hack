@@ -28,8 +28,13 @@ public class PlayerDataService {
        return playerDataRepo.findById(player.getId());
     }
 
-    public Player getById(Player player){
-        return playerDataRepo.getById(player.getId());
+    public Player getPlayerById(Player player){
+        Player player1 = playerDataRepo.getById(player.getId());
+        return player1;
+    }
+
+    public List<Player> getAllPlayer(){
+       return playerDataRepo.findAll();
     }
 
     public void savePlayer(Player player){
@@ -43,61 +48,46 @@ public class PlayerDataService {
         playerAchievementsRepo.save(playerAchievements);
     }
 
-    public void updateCashWithdraw(Transactions transactions, Player player){
-        Optional playerId = playerDataRepo.findById(transactions.getPlayerData().getId());
+    public void updateCashWithdraw(Transactions transactions, Player player1){
+        Player player = playerDataRepo.findById(player1.getId()).get();
         double amountToTransfer = transactions.getAmount();
 
-        switch ((int) amountToTransfer){
-            case 1:
-                if(amountToTransfer > 0 && amountToTransfer<80){
-                player.setPoints(player.getPoints() + 40);
-            };
-            break;
-            case 2:
-                if(amountToTransfer > 79 && amountToTransfer<400){
+
+                if(amountToTransfer > 0 && amountToTransfer<80) {
+                    player.setPoints(player.getPoints() + 40);
+                }
+                else if(amountToTransfer > 79 && amountToTransfer<400) {
                     player.setPoints(player.getPoints() + 60);
-                };
-            break;
-            case 3:
-                if(amountToTransfer > 399 && amountToTransfer<600){
+                }
+
+                else if(amountToTransfer > 399 && amountToTransfer<600){
                     player.setPoints(player.getPoints() + 80);
-                };
-            break;
-            case 4:
-                if(amountToTransfer > 599){
+                }
+
+                else if(amountToTransfer > 599){
                     player.setPoints(player.getPoints() + 100);
-                };
-            break;
+                }
+        playerDataRepo.save(player);
         }
 
-
-        playerDataRepo.save(player);
-    }
-
-    public void updateCashDeposit(Transactions transactions, Player player){
-        Optional playerId = playerDataRepo.findById(transactions.getPlayerData().getId());
+    public void updateCashDeposit(Transactions transactions, Player player1){
+        Player player = playerDataRepo.findById(player1.getId()).get();
         double amountToTransfer = transactions.getAmount();
-        switch ((int) amountToTransfer){
-            case 1:
-                if(amountToTransfer > 0 && amountToTransfer<80){
-                    player.setPoints(player.getPoints() + 40);
-                };
-                break;
-            case 2:
-                if(amountToTransfer > 79 && amountToTransfer<400){
-                    player.setPoints(player.getPoints() + 60);
-                };
-                break;
-            case 3:
-                if(amountToTransfer > 399 && amountToTransfer<600){
-                    player.setPoints(player.getPoints() + 80);
-                };
-                break;
-            case 4:
-                if(amountToTransfer > 599){
-                    player.setPoints(player.getPoints() + 100);
-                };
-                break;
+
+
+        if(amountToTransfer > 0 && amountToTransfer<80) {
+            player.setPoints(player.getPoints() + 40);
+        }
+        else if(amountToTransfer > 79 && amountToTransfer<400) {
+            player.setPoints(player.getPoints() + 60);
+        }
+
+        else if(amountToTransfer > 399 && amountToTransfer<600){
+            player.setPoints(player.getPoints() + 80);
+        }
+
+        else if(amountToTransfer > 599){
+            player.setPoints(player.getPoints() + 100);
         }
         playerDataRepo.save(player);
     }

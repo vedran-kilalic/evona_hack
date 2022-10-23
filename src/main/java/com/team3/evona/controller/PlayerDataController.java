@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @RestController
 
 public class PlayerDataController {
@@ -23,6 +25,11 @@ public class PlayerDataController {
         return new ModelAndView("evona.html");
     }
 
+    @GetMapping(value = "/all")
+    public List<Player> getAll(){
+       return playerDataService.getAllPlayer();
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public void login(@RequestBody Player player){
         if (playerDataService.loginPlayer(player).isEmpty()){
@@ -36,13 +43,12 @@ public class PlayerDataController {
 
     @RequestMapping(value = "/withdraw", method = RequestMethod.POST)
     public void withdraw(@RequestBody Transactions transactions){
-        Player player = playerDataService.getById(transactions.getPlayerData());
-        playerDataService.updateCashWithdraw(transactions, player);
+        playerDataService.updateCashWithdraw(transactions, transactions.getPlayerData());
     }
 
     @RequestMapping(value = "/deposit", method = RequestMethod.POST)
     public void deposit(@RequestBody Transactions transactions){
-        Player player = playerDataService.getById(transactions.getPlayerData());
+        Player player = playerDataService.getPlayerById(transactions.getPlayerData());
         playerDataService.updateCashDeposit(transactions, player);
     }
 

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="styleRanking.css">
+ <title>Hackathon</title>
+</head>
+<body background="assets\background.png">
+ <div class="leaderboard">
+  <header>Ranking</header>
+
+
+  </div>
+      <table>
+          <thead>
+              <tr>
+                  <td>
+                   Rank
+                  </td>
+                  <td>
+                      Player
+                  </td>
+                  <td>
+                      Score
+                  </td>
+                  <td>
+                      Achievements
+                  </td>
+              </tr>
+          </thead>
+          <tbody id="myTable">
+              <tr>
+                  <td id="winner"><img src="assets\level 1.png" alt=""></td>
+                  <td><p><a style="text-decoration: none; color: white" href="indexAch.html">JanMan</a></p></td>
+                  <td>239</td>
+                  <td><img src="assets\Asset 15@2x.png" alt=""> <img src="assets\Asset 15@2x.png" alt=""> <img src="assets\Asset 6@2x.png" alt=""> </td>
+                  
+              </tr>
+              
+              <tr>
+                  <td id="runner-up"><img src="assets\level 2.png" alt=""></td>
+                  <td><p> John Walker</p></td>
+                  <td>209</td>
+                  <td><img src="assets\Asset 9@2x.png" alt=""></td>
+              </tr>
+              
+              <tr>
+                  <td id="second-runner-up"><img src="assets\level 3.png" alt=""></td>
+                  <td><p> Toby Foden</p></td>
+                  <td>154</td>
+                  <td><img src="assets\Asset 6@2x.png" alt=""></td>
+                  
+              </tr>
+              
+              <tr>
+                  <td><img src="assets\level 4.png" alt=""></td>
+                  <td><p> Leonardo Wolf</p></td>
+                  <td>100</td>
+                  <td><img src="assets\Asset 9@2x.png " alt=""></td>
+              </tr>
+              
+              <tr>
+                  <td><img src="assets\level 5.png" alt=""></td>
+                  <td><p> Max Cigerett</p></td>
+                  <td>82</td>
+                  <td><img src="assets\Asset 6@2x.png" alt=""></td>
+                  
+              </tr>
+
+              <tr>
+               <td><img src="assets\level 3.png" alt=""></td>
+               <td><p> Nicolo Barzini</p></td>
+               <td>82</td>
+               <td><img src="assets\Asset 6@2x.png" alt=""></td>
+               
+              </tr>
+
+              <tr>
+               <td><img src="assets\level 1.png" alt=""></td>
+               <td><p> Archuleto Mariachi</p></td>
+               <td>82</td>
+               <td><img src="assets\Asset 6@2x.png" alt=""></td>
+               
+              </tr>
+
+          </tbody>
+      </table>
+  </div>
+</div>
+
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+ <script type="text/javascript">
+     $.get("/all", function(data) {
+
+
+         $("#myTable").html("");
+
+         console.log(data);
+         var html = "";
+         for (var i = 0; i < data.length; i++) {
+             console.log(data[i]);
+
+             html +=`
+
+                 <tr class="tbodytr">
+                  <td id="winner"><img src="assets\\level 1.png" alt=""></td>
+                  <td><p><a style="text-decoration: none; color: white" href="ach.html">`+data[i].username+`</a></p></td>
+                  <td>`+data[i].points+`</td>
+                  <td><img src="assets\\Asset 15@2x.png" alt=""> <img src="assets\\Asset 15@2x.png" alt=""> <img src="assets\\Asset 6@2x.png" alt=""> </td>
+                 </tr>`
+         }
+
+         $("#myTable").html(html);
+
+     });
+
+
+ </script>
+
+
+</body>
+</html>
