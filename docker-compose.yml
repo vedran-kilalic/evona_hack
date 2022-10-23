@@ -1,0 +1,19 @@
+version: "3.1"
+
+services:
+  mysql:
+    image: mysql/mysql-server:8.0
+#    volumes:
+#        - ./database/:/docker-entrypoint-initdb.d/
+#    ports:
+#      - "3308:3306"
+
+  appserver:
+    image: ${DOCKER_REGISTRY-}team-c
+    build:
+       context: .
+       dockerfile: .docker/Dockerfile
+    ports:
+      - "8083:8080"
+
+    
