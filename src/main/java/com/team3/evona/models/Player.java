@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "PlayerData")
-public class PlayerData {
+public class Player {
 
     @Id
     @Column(name = "id")
@@ -22,7 +22,7 @@ public class PlayerData {
     @Column(name = "cash")
     double cash;
 
-    public PlayerData(String id, String username, int points, int levelId, double cash) {
+    public Player(String id, String username, int points, int levelId, double cash) {
         this.id = id;
         this.username = username;
         this.points = points;
@@ -31,7 +31,7 @@ public class PlayerData {
 
     }
 
-    public PlayerData() {
+    public Player() {
     }
 
     public String getId() {

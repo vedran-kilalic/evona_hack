@@ -5,13 +5,13 @@ public class Transactions {
     String txId;
     String providerId;
     int amount;
-    PlayerData playerData;
+    Player player;
 
-    public Transactions(String txId, String providerId, int amount, PlayerData playerData) {
+    public Transactions(String txId, String providerId, int amount, Player player) {
         this.txId = txId;
         this.providerId = providerId;
         this.amount = amount;
-        this.playerData = playerData;
+        this.player = player;
     }
 
     public String getTxId() {
@@ -38,11 +38,11 @@ public class Transactions {
         this.amount = amount;
     }
 
-    public PlayerData getPlayerData() {
-        return playerData;
+    public Player getPlayerData() {
+        return player;
     }
 
-    public void setPlayerData(PlayerData playerData) {
-        this.playerData = playerData;
+    public void setPlayerData(Player player) {
+        this.player = player;
     }
 }
