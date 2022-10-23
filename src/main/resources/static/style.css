@@ -36,6 +36,7 @@ main {
 aside {
   width: var(--navbar-width);
   height: 1000px;
+  margin-top:-30%!important;
   width: 400px;
   display: flex;
   align-items: center;
